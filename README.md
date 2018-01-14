@@ -7,16 +7,18 @@ I based my research on the implementation done by [guh](https://github.com/guh/g
 
 Unfortunately I was not able to find a pattern in the codes used, so the tool just works with a sequence of binary digits indicating HIGH/LOW signals to be sent. 
 
+The second argument you need to provide is the pin number the transmitter is connected to.  
+
 To switch on socket A, run the following command:
 
 ```
-unitec-rfsend 001011000011111010001111
+unitec-rfsend 001011000011111010001111 0
 ```
 
 You may use spaces in the code for better readability:
 
 ```
-unitec-rfsend "0010 1100 0011 1110 1000 1111"
+unitec-rfsend "0010 1100 0011 1110 1000 1111" 0
 ```
 
 See below for a number of possible codes.

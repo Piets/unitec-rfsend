@@ -3,13 +3,10 @@
 #include <string.h>
 #include <stdlib.h>
 
-int pin = 0;
-int i, h;
+int shortPulse = 450;
+int longPulse = 950;
 
-int shortPulse = 475;
-int longPulse = 975;
-
-void sendBit(int bit) {
+void sendBit(int bit, int pin) {
   if (bit == 0) {
     digitalWrite(pin, HIGH);
     delayMicroseconds(longPulse);
@@ -23,27 +20,33 @@ void sendBit(int bit) {
   }
 }
 
-void pulse(char codeString[], int amount) {
-  for (h = 0; h < amount; h++) {
+void pulse(char codeString[], int pin) {
+  int i, h;
+
+  for (h = 0; h < 5; h++) {
     digitalWrite(pin, HIGH);
     delayMicroseconds(shortPulse);
     digitalWrite(pin, LOW);
     delayMicroseconds(5 * shortPulse);
 
     for (i = 0; i < strlen(codeString); i++){
-      sendBit(codeString[i] - '0');
+      sendBit(codeString[i] - '0', pin);
     }
   }
 }
 
-int main (int argc, char **argv)
-{
+int main (int argc, char **argv) {
   wiringPiSetup();
 
-  pinMode (pin, OUTPUT);
+  int pin = atoi(argv[2]);
+  pinMode(pin, OUTPUT);
   digitalWrite(pin, LOW);
 
-  pulse(argv[1], 10);
+  int h;
+  for (h = 0; h < 3; h++) {
+    pulse(argv[1], pin);
+    delayMicroseconds(5 * longPulse);
+  }
 
   return 0;
 }
