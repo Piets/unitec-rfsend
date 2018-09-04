@@ -3,6 +3,10 @@
 This is a fork of [jacobmellin/unitec-rfsend](https://github.com/jacobmellin/unitec-rfsend). The original code didn't work for me so I modified it a little bit. In particular I added sending of a header before each datagram but on the other hand I removed the delay between datagrams.  
 I based my research on the implementation done by [guh](https://github.com/guh/guh) for similiar sockets, therefore I switched over to their nomenclature (long pulse is logical zero and short pulse is logical one). Therefore the codes you see may seem "inverted" to you. But to be honest, it works for me, so at least I'm happy :-)
 
+## Installation
+
+Make sure to have [wiringPi](https://wiringpi.com) installed and available. Then simply run `make` inside the repository. Make sure to run with the appropriate permissions or else sending will fail (sudo when in doubt).
+
 ## Usage
 
 Unfortunately I was not able to find a pattern in the codes used, so the tool just works with a sequence of binary digits indicating HIGH/LOW signals to be sent. 
@@ -34,7 +38,7 @@ Receiver: 55006x10
 1 = 475us HIGH, 975us LOW
 ```
 
-## Codes for controlling the four included outlets:
+## Codes for controlling the three included outlets:
 
 ```
 A ON:	0010 1100 0011 1110 1000 1111
